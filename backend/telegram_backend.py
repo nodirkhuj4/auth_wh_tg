@@ -14,27 +14,16 @@ class TgBackend(ModelBackend):
         self.user_model = get_user_model()
 
     def get_phone_number_data(self, phone_number):
-        """
-        Method used for filtering query.
-        """
+
         phone_number_field = getattr(settings, 'PHONE_NUMBER_FIELD', 'phone_number')
         data = {
             phone_number_field: phone_number
         }
         return data
         
-    '''def get_username(self):
-        """
-        Returns a UUID-based 'random' and unique username.
-
-        This is required data for user models with a username field.
-        """
-        return str(uuid.uuid4())[:100]'''
 
     def create_user(self, tg_token, **extra_fields):
-        """
-        Create and returns the user based on the phone_token.
-        """
+
         password = self.user_model.objects.make_random_password()
 
 
